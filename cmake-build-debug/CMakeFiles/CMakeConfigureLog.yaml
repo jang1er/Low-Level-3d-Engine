@@ -556,3 +556,222 @@ events:
       Running the CXX compiler's linker: "/usr/bin/ld" "-v"
       GNU ld (GNU Binutils for Ubuntu) 2.38
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "vendor/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3hO27a"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3hO27a"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/jonas/Git/Low-Level-3d-Engine/vendor/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3hO27a'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_954d8
+        [1/2] /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -fdiagnostics-color=always -o CMakeFiles/cmTC_954d8.dir/src.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-3hO27a/src.c
+        [2/2] : && /usr/bin/cc   CMakeFiles/cmTC_954d8.dir/src.c.o -o cmTC_954d8   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "vendor/glfw/src/CMakeLists.txt:69 (check_function_exists)"
+    checks:
+      - "Looking for memfd_create"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zH5WRW"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zH5WRW"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/jonas/Git/Low-Level-3d-Engine/vendor/glfw/CMake/modules"
+    buildResult:
+      variable: "HAVE_MEMFD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zH5WRW'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_8ccfa
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=memfd_create -fdiagnostics-color=always -o CMakeFiles/cmTC_8ccfa.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-zH5WRW/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=memfd_create  CMakeFiles/cmTC_8ccfa.dir/CheckFunctionExists.c.o -o cmTC_8ccfa   && :
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:693 (check_library_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-MwAvQj"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-MwAvQj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-MwAvQj'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_cb0b2
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -fdiagnostics-color=always -o CMakeFiles/cmTC_cb0b2.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-MwAvQj/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=XOpenDisplay  CMakeFiles/cmTC_cb0b2.dir/CheckFunctionExists.c.o -o cmTC_cb0b2  /usr/lib/x86_64-linux-gnu/libX11.so  /usr/lib/x86_64-linux-gnu/libXext.so && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:708 (check_function_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xb6R5n"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xb6R5n"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xb6R5n'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_e7ac5
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname -fdiagnostics-color=always -o CMakeFiles/cmTC_e7ac5.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-xb6R5n/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=gethostbyname  CMakeFiles/cmTC_e7ac5.dir/CheckFunctionExists.c.o -o cmTC_e7ac5   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:722 (check_function_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ipamLS"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ipamLS"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ipamLS'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_a6dcc
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect -fdiagnostics-color=always -o CMakeFiles/cmTC_a6dcc.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-ipamLS/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=connect  CMakeFiles/cmTC_a6dcc.dir/CheckFunctionExists.c.o -o cmTC_a6dcc   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:731 (check_function_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wKJNXs"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wKJNXs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wKJNXs'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_9e80d
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove -fdiagnostics-color=always -o CMakeFiles/cmTC_9e80d.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-wKJNXs/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=remove  CMakeFiles/cmTC_9e80d.dir/CheckFunctionExists.c.o -o cmTC_9e80d   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:740 (check_function_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-detMR3"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-detMR3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-detMR3'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_a31bd
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat -fdiagnostics-color=always -o CMakeFiles/cmTC_a31bd.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-detMR3/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=shmat  CMakeFiles/cmTC_a31bd.dir/CheckFunctionExists.c.o -o cmTC_a31bd   && :
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/home/jonas/Programs/clion-2024.2.2/bin/cmake/linux/x64/share/cmake-3.29/Modules/FindX11.cmake:750 (check_library_exists)"
+      - "vendor/glew/build/cmake/CMakeLists.txt:50 (find_package)"
+    checks:
+      - "Looking for IceConnectionNumber in ICE"
+    directories:
+      source: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-60LlDr"
+      binary: "/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-60LlDr"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: '/home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-60LlDr'
+        
+        Run Build Command(s): /home/jonas/Programs/clion-2024.2.2/bin/ninja/linux/x64/ninja -v cmTC_b240f
+        [1/2] /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -fdiagnostics-color=always -o CMakeFiles/cmTC_b240f.dir/CheckFunctionExists.c.o -c /home/jonas/Git/Low-Level-3d-Engine/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-60LlDr/CheckFunctionExists.c
+        [2/2] : && /usr/bin/cc -DCHECK_FUNCTION_EXISTS=IceConnectionNumber  CMakeFiles/cmTC_b240f.dir/CheckFunctionExists.c.o -o cmTC_b240f  -lICE && :
+        
+      exitCode: 0
+...
