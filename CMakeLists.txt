@@ -7,6 +7,8 @@ add_executable(Low_Level_3d_Engine main.cpp
         src/Build/GladBuild.cpp
         src/common/shader.cpp
         src/common/shader.hpp
+        src/common/Textures.cpp
+        src/common/Textures.hpp
 )
 
 target_include_directories(Low_Level_3d_Engine SYSTEM PRIVATE "vendor/glm" "vendor/glad" "vendor/glfw/include")
