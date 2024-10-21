@@ -9,6 +9,8 @@
 #include <random>
 #include <X11/X.h>
 
+#include "common/Textures.hpp"
+
 using namespace glm;
 
 
@@ -43,6 +45,13 @@ int main() {
 
     // set input mode for glfw to use
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    // set unlimited fps
+    //glfwSwapInterval(0);
+
+    // setup fps counter
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
 
     // enable OpenGL Depth Test -> correct drawing order
     glEnable(GL_DEPTH_TEST);
@@ -91,7 +100,8 @@ int main() {
     // Give the defined vertices to OpenGL
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_triangle_color_buffer_data), g_triangle_color_buffer_data, GL_STATIC_DRAW);
 
-    GLuint programID = LoadShaders("src/shaders/ColorShader.vert", "src/shaders/ColorShader.frag");
+    GLuint programID = LoadShaders("src/shaders/TextureShader.vert", "src/shaders/TextureShader.frag");
+    GLuint programID_triangle = LoadShaders("src/shaders/ColorShader.vert", "src/shaders/ColorShader.frag");
 
     // get the MVP ID to be used for the shader
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
@@ -155,14 +165,6 @@ int main() {
     };
 
 
-    static GLfloat g_cube_color_buffer_data[12*3*3];
-    // generate random colors
-    for(int i = 0; i < 12*3; i++) {
-        g_cube_color_buffer_data[3*i+0] = rand_value();
-        g_cube_color_buffer_data[3*i+1] = rand_value();
-        g_cube_color_buffer_data[3*i+2] = rand_value();
-    }
-
     // identifier for buffer
     GLuint cube_vertexbuffer;
     // generate buffer with identifier
@@ -172,13 +174,65 @@ int main() {
     // Give the defined vertices to OpenGL
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_cube_vertex_buffer_data), g_cube_vertex_buffer_data, GL_STATIC_DRAW);
 
-    // identifier for buffer
-    GLuint cube_colorbuffer;
-    // generate buffer with identifier
-    glGenBuffers(1, &cube_colorbuffer);
-    // bind buffer
-    glBindBuffer(GL_ARRAY_BUFFER, cube_colorbuffer);
-    // Give the defined vertices to OpenGL
+    // load texture to be used on cube
+    //GLuint Texture = Textures::loadBMP("src/Textures/uvtemplate-2.bmp");
+    GLuint Texture = Textures::loadDDS("src/Textures/uvtemplate.DDS");
+
+    // get the location of texture Uniform
+    GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
+
+    // UV data for cube
+    static GLfloat g_uv_buffer_data[] = {
+        0.000059f, 1.0f-0.000004f,
+        0.000103f, 1.0f-0.336048f,
+        0.335973f, 1.0f-0.335903f,
+        1.000023f, 1.0f-0.000013f,
+        0.667979f, 1.0f-0.335851f,
+        0.999958f, 1.0f-0.336064f,
+        0.667979f, 1.0f-0.335851f,
+        0.336024f, 1.0f-0.671877f,
+        0.667969f, 1.0f-0.671889f,
+        1.000023f, 1.0f-0.000013f,
+        0.668104f, 1.0f-0.000013f,
+        0.667979f, 1.0f-0.335851f,
+        0.000059f, 1.0f-0.000004f,
+        0.335973f, 1.0f-0.335903f,
+        0.336098f, 1.0f-0.000071f,
+        0.667979f, 1.0f-0.335851f,
+        0.335973f, 1.0f-0.335903f,
+        0.336024f, 1.0f-0.671877f,
+        1.000004f, 1.0f-0.671847f,
+        0.999958f, 1.0f-0.336064f,
+        0.667979f, 1.0f-0.335851f,
+        0.668104f, 1.0f-0.000013f,
+        0.335973f, 1.0f-0.335903f,
+        0.667979f, 1.0f-0.335851f,
+        0.335973f, 1.0f-0.335903f,
+        0.668104f, 1.0f-0.000013f,
+        0.336098f, 1.0f-0.000071f,
+        0.000103f, 1.0f-0.336048f,
+        0.000004f, 1.0f-0.671870f,
+        0.336024f, 1.0f-0.671877f,
+        0.000103f, 1.0f-0.336048f,
+        0.336024f, 1.0f-0.671877f,
+        0.335973f, 1.0f-0.335903f,
+        0.667969f, 1.0f-0.671889f,
+        1.000004f, 1.0f-0.671847f,
+        0.667979f, 1.0f-0.335851f
+    };
+
+    // transform uv coordinates
+    for(unsigned int i = 1; i < sizeof(g_uv_buffer_data); i += 2) {
+        g_uv_buffer_data[i] = 1.0f - g_uv_buffer_data[i];
+    }
+
+
+    GLuint cube_uvbuffer;
+    glGenBuffers(1, &cube_uvbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, cube_uvbuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+
+
 
     constexpr float TIMESTEP = 0.01f;
 
@@ -186,26 +240,19 @@ int main() {
     glClearColor(0.2f, 0.0f, 0.7f, 1.0f);
 
     do {
-        // Clear the screen
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        //change colors for the array
-        for(int i = 0; i < 12*3; i++) {
-            float red = g_cube_color_buffer_data[3*i+0];
-            float green = g_cube_color_buffer_data[3*i+1];
-            float blue = g_cube_color_buffer_data[3*i+2];
-
-            red = red > 1 ? 0 : red + TIMESTEP * rand_value();
-            green = green > 1 ? 0 : green + TIMESTEP * rand_value();
-            blue = blue > 1 ? 0 : blue + TIMESTEP * rand_value();
-
-            g_cube_color_buffer_data[3*i+0] = red;
-            g_cube_color_buffer_data[3*i+1] = green;
-            g_cube_color_buffer_data[3*i+2] = blue;
+        // track the frame time
+        double currentTime = glfwGetTime();
+        nbFrames++;
+        if(currentTime - lastTime >= 1.0) { // more than a second has elapsed
+            // print the current frame time over 1 second and reset the timer
+            printf("Frame Time: %f ms [%i fps]\n", 1000.0/double(nbFrames), nbFrames);
+            lastTime = currentTime;
+            nbFrames = 0;
         }
 
-        // give the new color data to OpenGL for rendering
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_cube_color_buffer_data), g_cube_color_buffer_data, GL_STATIC_DRAW);
+
+        // Clear the screen
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // 1st Draw Call: Pass OpenGL the data for the triangle
         glEnableVertexAttribArray(0); // 1st attribute: Vertex data triangle
@@ -231,7 +278,7 @@ int main() {
         );
 
         // use the shader
-        glUseProgram(programID);
+        glUseProgram(programID_triangle);
 
         // give the shader the triangle MVP matrix
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP_Triangle[0][0]);
@@ -254,10 +301,10 @@ int main() {
         );
 
         glEnableVertexAttribArray(1); // 2nd Attribute: Color data
-        glBindBuffer(GL_ARRAY_BUFFER, cube_colorbuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, cube_uvbuffer);
         glVertexAttribPointer(
         1,          // attribute 0, must match layout in shader
-        3,          //size
+        2,          //size
         GL_FLOAT,   //type
         GL_FALSE,   //normalized?
         0,          //stride
@@ -269,6 +316,12 @@ int main() {
 
         // give the shader the cube MVP matrix
         glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP_Cube[0][0]);
+
+        // Bind the texture in Texture Unit 0
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, Texture);
+        // set the Sampler2D in the shader to use this texture
+        glUniform1i(TextureID, 0);
 
         // Draw the cube
         glDrawArrays(GL_TRIANGLES, 0, 12 * 3);

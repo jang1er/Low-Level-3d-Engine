@@ -70,6 +70,13 @@ build CMakeFiles/Low_Level_3d_Engine.dir/src/common/shader.cpp.o: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles/Low_Level_3d_Engine.dir
   OBJECT_FILE_DIR = CMakeFiles/Low_Level_3d_Engine.dir/src/common
 
+build CMakeFiles/Low_Level_3d_Engine.dir/src/common/Textures.cpp.o: CXX_COMPILER__Low_Level_3d_Engine_unscanned_Debug /home/jonas/Git/Low-Level-3d-Engine/src/common/Textures.cpp || cmake_object_order_depends_target_Low_Level_3d_Engine
+  DEP_FILE = CMakeFiles/Low_Level_3d_Engine.dir/src/common/Textures.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -I/home/jonas/Git/Low-Level-3d-Engine/src -isystem /home/jonas/Git/Low-Level-3d-Engine/vendor/glm -isystem /home/jonas/Git/Low-Level-3d-Engine/vendor/glad -isystem /home/jonas/Git/Low-Level-3d-Engine/vendor/glfw/include
+  OBJECT_DIR = CMakeFiles/Low_Level_3d_Engine.dir
+  OBJECT_FILE_DIR = CMakeFiles/Low_Level_3d_Engine.dir/src/common
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Low_Level_3d_Engine
@@ -78,7 +85,7 @@ build CMakeFiles/Low_Level_3d_Engine.dir/src/common/shader.cpp.o: CXX_COMPILER__
 #############################################
 # Link the executable Low_Level_3d_Engine
 
-build Low_Level_3d_Engine: CXX_EXECUTABLE_LINKER__Low_Level_3d_Engine_Debug CMakeFiles/Low_Level_3d_Engine.dir/main.cpp.o CMakeFiles/Low_Level_3d_Engine.dir/src/Build/GladBuild.cpp.o CMakeFiles/Low_Level_3d_Engine.dir/src/common/shader.cpp.o | vendor/glfw/src/libglfw3.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/librt.a /usr/lib/x86_64-linux-gnu/libm.so || vendor/glfw/src/libglfw3.a
+build Low_Level_3d_Engine: CXX_EXECUTABLE_LINKER__Low_Level_3d_Engine_Debug CMakeFiles/Low_Level_3d_Engine.dir/main.cpp.o CMakeFiles/Low_Level_3d_Engine.dir/src/Build/GladBuild.cpp.o CMakeFiles/Low_Level_3d_Engine.dir/src/common/shader.cpp.o CMakeFiles/Low_Level_3d_Engine.dir/src/common/Textures.cpp.o | vendor/glfw/src/libglfw3.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/librt.a /usr/lib/x86_64-linux-gnu/libm.so || vendor/glfw/src/libglfw3.a
   FLAGS = -g
   LINK_LIBRARIES = vendor/glfw/src/libglfw3.a  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so  /usr/lib/x86_64-linux-gnu/librt.a  -lm  -ldl
   OBJECT_DIR = CMakeFiles/Low_Level_3d_Engine.dir
