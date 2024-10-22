@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <random>
-#include <X11/X.h>
+#include <common/controls.hpp>
 
 #include "common/Textures.hpp"
 
@@ -31,14 +31,14 @@ int main() {
     glfwWindowHint( GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE );
 
     GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH , WINDOW_HEIGHT, "Low Level 3d Engine", NULL, NULL);
-    if(window == NULL) {
+    if(window == nullptr) {
         fprintf( stderr, "Failed to open GLFW window \n" );
         glfwTerminate();
         return -1;
     }
 
     glfwMakeContextCurrent(window);
-    if(!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
+    if(!gladLoadGL(glfwGetProcAddress)) {
         fprintf( stderr, "Failed to initialize GLAD\n" );
         return -1;
     }
@@ -49,6 +49,8 @@ int main() {
     // set unlimited fps
     //glfwSwapInterval(0);
 
+    // give windows to input control
+    controls inputControl(window);
     // setup fps counter
     double lastTime = glfwGetTime();
     int nbFrames = 0;
@@ -57,12 +59,6 @@ int main() {
     glEnable(GL_DEPTH_TEST);
     // accept fragment if it is closest to the camera
     glDepthFunc(GL_LESS);
-
-    // declare random generator and distribution
-    std::default_random_engine generator;
-    generator.seed(std::time(0));
-    std::uniform_real_distribution<float> distribution(0.0, 1.0);
-    auto rand_value 	= std::bind(distribution, generator); // bind both together for easier use
 
     // set up vertex data
     GLuint VertexArrayID;
@@ -107,21 +103,19 @@ int main() {
     GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
     // Create the projection Matrix: 45° FOV, Aspect Ratio: Width / Height, display range: 0.1 -> 100.0 units
-    mat4 Projection = glm::perspective(glm::radians(45.0f), ASPECT_RATIO, 0.1f, 100.0f);
+    //mat4 Projection = glm::perspective(glm::radians(45.0f), ASPECT_RATIO, 0.1f, 100.0f);
 
-    mat4 View = glm::lookAt(
+    /*mat4 View = glm::lookAt(
         vec3(4,3,3),            // camera is at (4,3,3)
         vec3(0, 0, 0),          // looks ath the world origin
         vec3(0, 1, 0)           // and the head is up
-    );
+    );*/
 
     // model matrix: scaling with a factor of (2, 1.5f, -1)
     mat4 Model_Triangle = glm::translate(glm::mat4(1.0f), vec3(1, 0, 0));
     mat4 Model_Cube = glm::translate(glm::mat4(1.0f), vec3(-2, 0, 0));
 
-    // construct the project view model matrix
-    mat4 MVP_Triangle = Projection * View * Model_Triangle;
-    mat4 MVP_Cube = Projection * View * Model_Cube;
+
 
 
     // cube handling
@@ -239,6 +233,9 @@ int main() {
     // set background
     glClearColor(0.2f, 0.0f, 0.7f, 1.0f);
 
+    // enable backface culling
+    glEnable(GL_CULL_FACE);
+
     do {
         // track the frame time
         double currentTime = glfwGetTime();
@@ -253,6 +250,18 @@ int main() {
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // recompute MVP matrix to enable camera movement
+        inputControl.ComputeMatricesFromInputs();
+        // recompute View Matrix
+        glm::mat4 View = inputControl.GetViewMatrix();
+        // recompute Projection
+        glm::mat4 Projection = inputControl.GetProjectionMatrix();
+
+        // recompute MVP based on control input
+        // construct the project view model matrix
+        mat4 MVP_Triangle = Projection * View * Model_Triangle;
+        mat4 MVP_Cube = Projection * View * Model_Cube;
 
         // 1st Draw Call: Pass OpenGL the data for the triangle
         glEnableVertexAttribArray(0); // 1st attribute: Vertex data triangle
